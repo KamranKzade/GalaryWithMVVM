@@ -29,6 +29,8 @@ public class MainViewModel : BaseViewModel
     }
 
 
+    public GalaryImage GalaryImage { get; set; }
+
     public RelayCommand SmallIconCommand { get; set; }
     public RelayCommand NormadIconCommand { get; set; }
     public RelayCommand LargeIconCommand { get; set; }
@@ -57,8 +59,6 @@ public class MainViewModel : BaseViewModel
             uc.DataContext = vm;
 
             uniform.Children.Add(uc);
-
-
 
             uc.MouseDoubleClick += Photo_MouseDoubleClick;
         }
@@ -92,26 +92,29 @@ Edit -> Add Image", "Information", MessageBoxButton.OK, MessageBoxImage.Informat
             var uniformGrid = o as UniformGrid;
 
 
-            var vm = new Add_Image_WindowViewModel();
+            var viewModelForAdd = new Add_Image_WindowViewModel();
 
-            Add_Image_Window add = new();
-            add.DataContext = vm;
-            add.ShowDialog();
-
-
-            BitmapImage picture = new BitmapImage(new Uri(vm.filePath!, UriKind.Relative));
+            Add_Image_Window addWindowPage = new();
+            addWindowPage.DataContext = viewModelForAdd;
+            addWindowPage.ShowDialog();
 
 
+
+            BitmapImage picture = new BitmapImage(new Uri(viewModelForAdd.filePath!, UriKind.Relative));
+
+
+            
 
             var uCViewModel = new UCViewModel();
             uCViewModel.CurrentImageSource = picture;
-            uCViewModel.Photo = vm.Image;
+            uCViewModel.Photo = viewModelForAdd.Image;
 
             UserControl_Photos uc = new UserControl_Photos();
-            uc.DataContext = vm;
+            uc.DataContext = uCViewModel;
 
-            uniformGrid!.Children.Add(uc);
-            GalaryImages.Add(vm.Image);
+
+            uniformGrid.Children.Add(uc);
+            GalaryImages.Add(viewModelForAdd.Image);
         });
     }
 

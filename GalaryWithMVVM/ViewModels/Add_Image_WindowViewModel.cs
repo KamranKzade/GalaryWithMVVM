@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 
 namespace GalaryWithMVVM.ViewModels;
 
-public class Add_Image_WindowViewModel
+public class Add_Image_WindowViewModel : BaseViewModel
 {
     public GalaryImage Image { get; set; }
     public string filePath { get; set; }
@@ -52,7 +52,6 @@ public class Add_Image_WindowViewModel
         {
             var window = o as Window;
 
-            //object mystackpanel =  window.FindName("myStackPanel");
 
             foreach (StackPanel tb in FindVisualChilds<StackPanel>(window))
             {
@@ -77,7 +76,6 @@ public class Add_Image_WindowViewModel
                 break;
             }
 
-            ///Application.Current.Shutdown();
 
         });
     }
@@ -113,20 +111,4 @@ public class Add_Image_WindowViewModel
     //    }
     //}
 
-    //private void Button_Click(object sender, RoutedEventArgs e)
-    //{
-    //    Image.Name = image_name.Text;
-    //    Image.Author = author_name.Text;
-    //    Image.ImageUrl = filePath;
-    //    try
-    //    {
-    //        Image.Time = DateTime.Parse(creation_name.Text);
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        MessageBox.Show(ex.Message, "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-    //    }
-
-    //    DialogResult = true;
-    //}
 }
