@@ -29,7 +29,6 @@ public class MainViewModel : BaseViewModel
     }
 
 
-    public GalaryImage GalaryImage { get; set; }
 
     public RelayCommand SmallIconCommand { get; set; }
     public RelayCommand NormadIconCommand { get; set; }
@@ -103,7 +102,7 @@ Edit -> Add Image", "Information", MessageBoxButton.OK, MessageBoxImage.Informat
             BitmapImage picture = new BitmapImage(new Uri(viewModelForAdd.filePath!, UriKind.Relative));
 
 
-            
+
 
             var uCViewModel = new UCViewModel();
             uCViewModel.CurrentImageSource = picture;
@@ -122,24 +121,37 @@ Edit -> Add Image", "Information", MessageBoxButton.OK, MessageBoxImage.Informat
 
     private void Photo_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
+        var userControlViewModel = new UCViewModel();
         var uc = sender as UserControl_Photos;
+        userControlViewModel.CurrentImageSource = uc!.Picture.ImageSource;
+        int count = 0;
 
+        //foreach (var item in GalaryImages)
+        for (int i = 0; i < GalaryImages.Count; i++)
+        {
+            var picture = new BitmapImage(new Uri(GalaryImages[i].ImageUrl!, UriKind.Relative));
+            count++;
+            if (picture.ToString() == uc.Picture.ImageSource.ToString())
+            {
+                userControlViewModel.Photo = GalaryImages[i];
+                break;
+            }
+        }
+        
 
+        uc.DataContext = userControlViewModel;
 
-
-
-
-        var viewModel = new PhotoWindowViewModel();
-        viewModel.Galaries = GalaryImages;
-        viewModel.user = uc!;
 
         PhotoWindow window = new();
+        var viewModel = new PhotoWindowViewModel();
+        viewModel.user = uc!;
+        viewModel.Galaries = GalaryImages;
+        viewModel.Galary = userControlViewModel.Photo;
+        viewModel.Count=count;
         window.DataContext = viewModel;
 
 
-
         window.ShowDialog();
-
     }
 
 }

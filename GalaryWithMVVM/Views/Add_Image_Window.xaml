@@ -38,10 +38,17 @@
                      AllowDrop="True"
                      Width="350">
                 <Ellipse.Fill>
-                    <ImageBrush x:Name="Picture" 
+                    <ImageBrush x:Name="Picture"
                                 Stretch="Fill" 
                            />
                 </Ellipse.Fill>
+                <Ellipse.InputBindings>
+                    <MouseBinding 
+                           Command="{Binding DataContext.CLoadModelFromDisk, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                        CommandParameter="{Binding ElementName=Picture}"
+                        Gesture="LeftClick"  
+                    />
+                </Ellipse.InputBindings>
             </Ellipse>
 
             <Button HorizontalAlignment="Center"

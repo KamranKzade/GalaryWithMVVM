@@ -21,6 +21,7 @@ public class Add_Image_WindowViewModel : BaseViewModel
 
     public RelayCommand AddImageCommand { get; set; }
     public RelayCommand AddImageButtonWithCommand { get; set; }
+    public RelayCommand CLoadModelFromDisk { get; set; }
 
 
 
@@ -77,6 +78,23 @@ public class Add_Image_WindowViewModel : BaseViewModel
             }
 
 
+        });
+
+        CLoadModelFromDisk = new RelayCommand((o) =>
+        {
+            var Picture = o as ImageBrush;
+
+           //if (e.Data.GetDataPresent(DataFormats.FileDrop))
+           //{
+           //    string[] filenames = e.Data.GetData(DataFormats.FileDrop, true) as string[];
+           //
+           //    foreach (string fileName in filenames!)
+           //    {
+           //        Picture.ImageSource = new BitmapImage(new Uri(fileName));
+           //
+           //        filePath = fileName;
+           //    }
+           //}
         });
     }
 

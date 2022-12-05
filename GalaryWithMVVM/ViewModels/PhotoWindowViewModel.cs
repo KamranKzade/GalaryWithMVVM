@@ -9,11 +9,12 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Linq;
 using System.Windows.Threading;
 
 namespace GalaryWithMVVM.ViewModels;
 
-public class PhotoWindowViewModel:BaseViewModel
+public class PhotoWindowViewModel : BaseViewModel
 {
 
     public DispatcherTimer Timer { get; set; }
@@ -26,15 +27,19 @@ public class PhotoWindowViewModel:BaseViewModel
     public ObservableCollection<GalaryImage> Galaries
     {
         get { return galaries; }
-        set { galaries = value;OnPropertyChanged(); }
+        set { galaries = value; OnPropertyChanged(); }
     }
 
 
+    private GalaryImage galary;
 
+    public GalaryImage Galary
+    {
+        get { return galary; }
+        set { galary = value; OnPropertyChanged(); }
+    }
 
-    public int MyProperty { get; set; }
-
-
+    public int Count { get; set; }
     public RelayCommand BackWindowCommand { get; set; }
     public RelayCommand PrevCommand { get; set; }
     public RelayCommand PauseCommand { get; set; }
@@ -46,33 +51,38 @@ public class PhotoWindowViewModel:BaseViewModel
         Timer = new();
 
         Galaries = new();
+        Galary = new();
 
 
         BackWindowCommand = new RelayCommand((o) =>
         {
             var window = o as Window;
-            window.Close();
+            window!.Close();
         });
 
 
         PrevCommand = new RelayCommand((o) =>
         {
             var mygrid = o as Grid;
-
             try
             {
-                var vm = new UCViewModel();
-
                 UserControl_Photos photo = new();
-
-                vm.CurrentImageSource = new BitmapImage(new Uri(Galaries![Galaries.IndexOf(vm.Photo) - 1]!.ImageUrl!, UriKind.Relative));
-                vm.Photo = Galaries[Galaries.IndexOf(vm.Photo) - 1];
-
+                var vm = new UCViewModel();
+                
+                vm.CurrentImageSource = new BitmapImage(new Uri(Galaries![Count]!.ImageUrl!, UriKind.Relative));
+                vm.Photo = Galaries[Count];
                 photo.DataContext = vm;
 
-                user = photo;
+                if (Count < 0)
+                {
+                    Count = 0;
+                }
 
-                mygrid.Children.Add(photo);
+                user = photo;
+                
+
+                mygrid!.Children.Add(photo);
+                Count--;
             }
             catch (Exception ex)
             {
@@ -87,17 +97,20 @@ public class PhotoWindowViewModel:BaseViewModel
 
             try
             {
+                UserControl_Photos photo =new();
                 var vm = new UCViewModel();
-
-                UserControl_Photos photo = new();
-
-                vm.CurrentImageSource = new BitmapImage(new Uri(Galaries![Galaries.IndexOf(vm.Photo) + 1]!.ImageUrl!, UriKind.Relative));
-                vm.Photo = Galaries[Galaries.IndexOf(vm.Photo) + 1];
+                vm.CurrentImageSource = new BitmapImage(new Uri(Galaries![Count ]!.ImageUrl!, UriKind.Relative));
+                vm.Photo = Galaries[Count ];
                 photo.DataContext = vm;
 
+                if (Count >Galaries.Count)
+                {
+                    Count = Galaries.Count;
+                }
 
                 user = photo;
                 mygrid!.Children.Add(photo);
+                Count++;
             }
             catch (Exception ex)
             {
