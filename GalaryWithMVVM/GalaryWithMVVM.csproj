@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Views\close-window.png" />
+    <None Remove="Views\Galary.png" />
+    <None Remove="Views\new.png" />
+    <None Remove="Views\opened-folder.png" />
+    <None Remove="Views\save %281%29.png" />
+    <None Remove="Views\save-as.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\new.png" />
+    <Resource Include="Images\opened-folder.png" />
+    <Resource Include="Images\save %281%29.png" />
+    <Resource Include="Images\save-as.png" />
+    <Resource Include="Images\close-window.png" />
+    <Resource Include="Images\Galary.png" />
+  </ItemGroup>
+
+</Project>

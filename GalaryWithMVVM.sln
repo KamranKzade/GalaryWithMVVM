@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GalaryWithMVVM", "GalaryWithMVVM\GalaryWithMVVM.csproj", "{452CEF09-4331-4CA8-98DD-9FCA2D887A3A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{452CEF09-4331-4CA8-98DD-9FCA2D887A3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{452CEF09-4331-4CA8-98DD-9FCA2D887A3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{452CEF09-4331-4CA8-98DD-9FCA2D887A3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{452CEF09-4331-4CA8-98DD-9FCA2D887A3A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7D715FDE-C2B0-4371-83AB-07DDB8AC1518}
+	EndGlobalSection
+EndGlobal

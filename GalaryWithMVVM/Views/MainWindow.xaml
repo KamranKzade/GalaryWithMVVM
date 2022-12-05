@@ -1,0 +1,87 @@
+﻿<Window x:Class="GalaryWithMVVM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GalaryWithMVVM"
+        mc:Ignorable="d"
+        Title="Galary"
+        Icon="/Images/Galary.png"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Height="750"
+        Width="1350">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Menu -->
+        <Menu Grid.Row="0" Background="{StaticResource mainColor}">
+
+            <MenuItem FontSize="{StaticResource MenuSize}" Header="File">
+                <MenuItem FontSize="{StaticResource MenuItemSize}"
+                          Header="New">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/new.png" Stretch="Fill"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+
+
+                <MenuItem FontSize="{StaticResource MenuItemSize}" Header="Open" >
+                    <MenuItem.Icon>
+                        <Image Source="/Images/opened-folder.png" Stretch="Fill"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+
+
+                <MenuItem FontSize="{StaticResource MenuItemSize}" Header="Save" >
+                    <MenuItem.Icon>
+                        <Image Source="/Images/save (1).png" Stretch="Fill"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+
+
+                <MenuItem FontSize="{StaticResource MenuItemSize}" Header="Save as" >
+                    <MenuItem.Icon>
+                        <Image Source="/Images/save-as.png" Stretch="Fill"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+
+
+                <MenuItem FontSize="{StaticResource MenuItemSize}"  Header="Exit" >
+                    <MenuItem.Icon>
+                        <Image Source="/Images/close-window.png" Stretch="Fill"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+
+            <MenuItem FontSize="{StaticResource MenuSize}" Header="Edit">
+                <MenuItem FontSize="{StaticResource MenuItemSize}"  Header="Add image" ></MenuItem>
+                <MenuItem FontSize="{StaticResource MenuItemSize}" Header="Add folder" ></MenuItem>
+            </MenuItem>
+
+            <MenuItem FontSize="{StaticResource MenuSize}" Header="View">
+                <MenuItem FontSize="{StaticResource MenuItemSize}" Command="{Binding SmallIconCommand}" CommandParameter="{Binding ElementName=wrapPanel}" Header="Small Icon" ></MenuItem>
+                <MenuItem FontSize="{StaticResource MenuItemSize}" Command="{Binding NormadIconCommand}" CommandParameter="{Binding ElementName=wrapPanel}" Header="Normad Icon"  ></MenuItem>
+                <MenuItem FontSize="{StaticResource MenuItemSize}" Command="{Binding LargeIconCommand}" CommandParameter="{Binding ElementName=wrapPanel}"  Header="Large Icon" ></MenuItem>
+            </MenuItem>
+
+            <MenuItem FontSize="{StaticResource MenuSize}" Header="About">
+                <MenuItem FontSize="{StaticResource MenuItemSize}" Header="About" ></MenuItem>
+            </MenuItem>
+        </Menu>
+
+        <!-- Galary -->
+        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto">
+            <UniformGrid Name="wrapPanel"
+                         Columns="3"
+                         Background="{StaticResource wrapPanelColor}">
+                
+
+            </UniformGrid>
+        </ScrollViewer>
+
+    </Grid>
+</Window>
