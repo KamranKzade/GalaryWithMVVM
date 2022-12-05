@@ -9,6 +9,9 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="ResourceDictionary/ColorDictionary.xaml"/>
                 <ResourceDictionary Source="ResourceDictionary/FontSizeDictionary.xaml"/>
+                <ResourceDictionary Source="ResourceDictionary/LabelSimpleStyle.xaml"/>
+                <ResourceDictionary Source="ResourceDictionary/TextboxStyle.xaml"/>
+                
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
 

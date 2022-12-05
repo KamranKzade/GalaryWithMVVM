@@ -1,5 +1,6 @@
 ﻿using GalaryWithMVVM.Commands;
 using GalaryWithMVVM.Models;
+using GalaryWithMVVM.Views;
 using GalaryWithMVVM.Views.UserControls;
 using System;
 using System.Collections.ObjectModel;
@@ -27,9 +28,11 @@ public class MainViewModel : BaseViewModel
         }
     }
 
+
     public RelayCommand SmallIconCommand { get; set; }
     public RelayCommand NormadIconCommand { get; set; }
     public RelayCommand LargeIconCommand { get; set; }
+    public RelayCommand AddImageCommand { get; set; }
 
 
 
@@ -55,8 +58,11 @@ public class MainViewModel : BaseViewModel
 
             uniform.Children.Add(uc);
 
-            //photo.MouseDoubleClick += Photo_MouseDoubleClick;
+
+
+            uc.MouseDoubleClick += Photo_MouseDoubleClick;
         }
+
 
         MessageBox.Show(@"if you want to add a picture
 Edit -> Add Image", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -79,38 +85,58 @@ Edit -> Add Image", "Information", MessageBoxButton.OK, MessageBoxImage.Informat
             var uniformGrid = o as UniformGrid;
             uniformGrid!.Columns = 2;
         });
+
+
+        AddImageCommand = new RelayCommand((o) =>
+        {
+            var uniformGrid = o as UniformGrid;
+
+
+            var vm = new Add_Image_WindowViewModel();
+
+            Add_Image_Window add = new();
+            add.DataContext = vm;
+            add.ShowDialog();
+
+
+            BitmapImage picture = new BitmapImage(new Uri(vm.filePath!, UriKind.Relative));
+
+
+
+            var uCViewModel = new UCViewModel();
+            uCViewModel.CurrentImageSource = picture;
+            uCViewModel.Photo = vm.Image;
+
+            UserControl_Photos uc = new UserControl_Photos();
+            uc.DataContext = vm;
+
+            uniformGrid!.Children.Add(uc);
+            GalaryImages.Add(vm.Image);
+        });
     }
 
 
 
-    //private void Photo_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
-    //{
-    //    var uc = sender as UserControl_Photos;
+    private void Photo_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        var uc = sender as UserControl_Photos;
 
 
-    //    Windows.PhotoWindow window = new(uc!.CurrentImageSource, uc.Photo, GalaryImages);
-
-    //    window.ShowDialog();
-
-    //}
-
-    //private void MenuItem_Click_1(object sender, RoutedEventArgs e) => wrapPanel.Columns = 2;
-    //private void MenuItem_Click_2(object sender, RoutedEventArgs e) => wrapPanel.Columns = 3;
-    //private void MenuItem_Click(object sender, RoutedEventArgs e) => wrapPanel.Columns = 4;
 
 
-    //private void Add_Image(object sender, RoutedEventArgs e)
-    //{
-    //    Add_Image_Window add = new();
-    //    add.ShowDialog();
 
-    //    BitmapImage picture = new BitmapImage(new Uri(add.filePath!, UriKind.Relative));
 
-    //    UserControl_Photos uc = new(picture, add.Image);
+        var viewModel = new PhotoWindowViewModel();
+        viewModel.Galaries = GalaryImages;
+        viewModel.user = uc!;
 
-    //    wrapPanel.Children.Add(uc);
-    //    GalaryImages.Add(add.Image);
+        PhotoWindow window = new();
+        window.DataContext = viewModel;
 
-    //}
+
+
+        window.ShowDialog();
+
+    }
 
 }

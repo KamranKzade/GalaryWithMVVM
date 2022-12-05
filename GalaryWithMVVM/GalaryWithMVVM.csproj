@@ -8,10 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Views\add_image.png" />
+    <None Remove="Views\back.png" />
     <None Remove="Views\close-window.png" />
     <None Remove="Views\Galary.png" />
     <None Remove="Views\new.png" />
+    <None Remove="Views\next.png" />
     <None Remove="Views\opened-folder.png" />
+    <None Remove="Views\pause.png" />
+    <None Remove="Views\prev.png" />
     <None Remove="Views\save %281%29.png" />
     <None Remove="Views\save-as.png" />
   </ItemGroup>
@@ -23,6 +28,11 @@
     <Resource Include="Images\save-as.png" />
     <Resource Include="Images\close-window.png" />
     <Resource Include="Images\Galary.png" />
+    <Resource Include="Images\add_image.png" />
+    <Resource Include="Images\back.png" />
+    <Resource Include="Images\next.png" />
+    <Resource Include="Images\pause.png" />
+    <Resource Include="Images\prev.png" />
   </ItemGroup>
 
 </Project>

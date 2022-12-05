@@ -58,7 +58,7 @@
             </MenuItem>
 
             <MenuItem FontSize="{StaticResource MenuSize}" Header="Edit">
-                <MenuItem FontSize="{StaticResource MenuItemSize}"  Header="Add image" ></MenuItem>
+                <MenuItem FontSize="{StaticResource MenuItemSize}" Command="{Binding AddImageCommand}" CommandParameter="{Binding ElementName=wrapPanel}"  Header="Add image" ></MenuItem>
                 <MenuItem FontSize="{StaticResource MenuItemSize}" Header="Add folder" ></MenuItem>
             </MenuItem>
 

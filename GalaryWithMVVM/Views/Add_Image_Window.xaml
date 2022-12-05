@@ -1,0 +1,113 @@
+﻿<Window x:Class="GalaryWithMVVM.Views.Add_Image_Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GalaryWithMVVM.Views"
+        mc:Ignorable="d"
+        Background="YellowGreen"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Title="Add Image"
+        Height="600"
+        Name="window"
+        Width="700">
+    <StackPanel Background="{StaticResource userControl_background}" 
+                Margin="10"
+                Name="myStackPanel">
+        <Grid Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.85*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Image Name"
+                   Style="{StaticResource simpleLabelStyle}"
+                   HorizontalContentAlignment="Left"/>
+
+            <TextBox Grid.Column="1"
+                     Style="{StaticResource textBStyle}"/>
+
+        </Grid>
+
+        <!-- Image -->
+        <StackPanel>
+
+            <Ellipse Margin="2"
+                     Height="200"
+                     AllowDrop="True"
+                     Width="350">
+                <Ellipse.Fill>
+                    <ImageBrush x:Name="Picture" 
+                                Stretch="Fill" 
+                           />
+                </Ellipse.Fill>
+            </Ellipse>
+
+            <Button HorizontalAlignment="Center"
+                    Margin="10"
+                    Padding="10"
+                    Command="{Binding AddImageCommand}"
+                    CommandParameter="{Binding ElementName=Picture}"
+                    Content="Add Image"
+                    FontFamily="Comic Sans Ms"
+                    FontWeight="Medium"
+                    FontSize="{StaticResource MenuSize}"
+                    Foreground="{StaticResource wrapPanelColor}"
+                    BorderThickness="0"
+                    Background="Chocolate">
+
+            </Button>
+        </StackPanel>
+
+        <!-- Author -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.85*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Author Name"
+                   Style="{StaticResource simpleLabelStyle}"/>
+
+            <TextBox Grid.Column="1"
+                     Style="{StaticResource textBStyle}"/>
+
+        </Grid>
+
+        <!-- Creation Date -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.85*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Creation Date"
+                   Style="{StaticResource simpleLabelStyle}"
+                   HorizontalContentAlignment="Left"/>
+
+            <TextBox Grid.Column="1"
+                     Style="{StaticResource textBStyle}"/>
+
+        </Grid>
+
+
+        <Button HorizontalAlignment="Center"
+                Width="150"
+                Command="{Binding AddImageButtonWithCommand}"
+                CommandParameter="{Binding ElementName=window}"
+                BorderThickness="0"
+                Background="Transparent"
+                Height="70">
+            <Ellipse Width="140"
+                     Height="60">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="/Images/add_image.png" Stretch="Uniform"/>
+                </Ellipse.Fill>
+            </Ellipse>
+
+        </Button>
+
+
+    </StackPanel>
+</Window>
