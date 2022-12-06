@@ -16,14 +16,12 @@ namespace GalaryWithMVVM.ViewModels;
 
 public class PhotoWindowViewModel : BaseViewModel
 {
-
+    public Grid MyGrid { get; set; }
     public DispatcherTimer Timer { get; set; }
 
     public UserControl_Photos user { get; set; }
 
-    public Grid MyGrid { get; set; }
     private ObservableCollection<GalaryImage> galaries;
-
     public ObservableCollection<GalaryImage> Galaries
     {
         get { return galaries; }
@@ -32,7 +30,6 @@ public class PhotoWindowViewModel : BaseViewModel
 
 
     private GalaryImage galary;
-
     public GalaryImage Galary
     {
         get { return galary; }
@@ -40,16 +37,17 @@ public class PhotoWindowViewModel : BaseViewModel
     }
 
     public int Count { get; set; }
+
     public RelayCommand BackWindowCommand { get; set; }
     public RelayCommand PrevCommand { get; set; }
     public RelayCommand PauseCommand { get; set; }
     public RelayCommand NextCommand { get; set; }
 
 
+
     public PhotoWindowViewModel()
     {
         Timer = new();
-
         Galaries = new();
         Galary = new();
 
@@ -66,9 +64,9 @@ public class PhotoWindowViewModel : BaseViewModel
             var mygrid = o as Grid;
             try
             {
+                Count--;
                 UserControl_Photos photo = new();
                 var vm = new UCViewModel();
-
                 vm.CurrentImageSource = new BitmapImage(new Uri(Galaries![Count]!.ImageUrl!, UriKind.Relative));
                 vm.Photo = Galaries[Count];
                 photo.DataContext = vm;
@@ -79,17 +77,16 @@ public class PhotoWindowViewModel : BaseViewModel
                 }
 
                 user = photo;
-
-
-                mygrid!.Children.Add(photo);
-                Count--;
+                MyGrid!.Children.Add(photo);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Information", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                Count = 0;
             }
 
         });
+
 
         NextCommand = new RelayCommand((o) =>
         {
@@ -109,7 +106,7 @@ public class PhotoWindowViewModel : BaseViewModel
                 }
 
                 user = photo;
-                mygrid!.Children.Add(photo);
+                MyGrid!.Children.Add(photo);
                 Count++;
             }
             catch (Exception ex)
@@ -121,12 +118,9 @@ public class PhotoWindowViewModel : BaseViewModel
 
         PauseCommand = new RelayCommand((o) =>
         {
-            var grid = o as Grid;
-            var mygrid = grid!.Children[2] as Grid;
-            var toggleButton = (grid!.Children[3] as StackPanel)!.Children[1] as ToggleButton;
+            var toggleButton = o as ToggleButton;
             var ellipse = toggleButton!.Content as Ellipse;
             var imageBrush = ellipse!.Fill as ImageBrush;
-
 
             if (toggleButton.IsChecked == true)
             {
@@ -146,23 +140,24 @@ public class PhotoWindowViewModel : BaseViewModel
     }
 
 
-
-
     private void Timer_Tick(object? sender, EventArgs e)
     {
         try
         {
-            var vm = new UCViewModel();
-
             UserControl_Photos photo = new();
-
-            vm.CurrentImageSource = new BitmapImage(new Uri(Galaries![Galaries.IndexOf(vm.Photo) + 1]!.ImageUrl!, UriKind.Relative));
-            vm.Photo = Galaries[Galaries.IndexOf(vm.Photo) + 1];
-
+            var vm = new UCViewModel();
+            vm.CurrentImageSource = new BitmapImage(new Uri(Galaries![Count]!.ImageUrl!, UriKind.Relative));
+            vm.Photo = Galaries[Count];
             photo.DataContext = vm;
 
+            if (Count > Galaries.Count)
+            {
+                Count = Galaries.Count;
+            }
+
             user = photo;
-            //  mygrid.Children.Add(photo);
+            MyGrid!.Children.Add(photo);
+            Count++;
         }
         catch (Exception ex)
         {

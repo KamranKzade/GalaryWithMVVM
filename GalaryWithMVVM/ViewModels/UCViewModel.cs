@@ -7,8 +7,8 @@ namespace GalaryWithMVVM.ViewModels;
 
 public class UCViewModel : BaseViewModel
 {
-    private GalaryImage photo;
-    public GalaryImage Photo
+    private GalaryImage? photo;
+    public GalaryImage? Photo
     {
         get { return photo; }
         set
@@ -19,8 +19,8 @@ public class UCViewModel : BaseViewModel
     }
 
 
-    private ImageSource _currentImageSource;
-    public ImageSource CurrentImageSource
+    private ImageSource? _currentImageSource;
+    public ImageSource? CurrentImageSource
     {
         get { return _currentImageSource; }
         set

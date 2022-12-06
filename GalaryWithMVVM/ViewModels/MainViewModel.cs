@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 namespace GalaryWithMVVM.ViewModels;
 
 
-
 public class MainViewModel : BaseViewModel
 {
 
@@ -34,8 +33,6 @@ public class MainViewModel : BaseViewModel
     public RelayCommand NormadIconCommand { get; set; }
     public RelayCommand LargeIconCommand { get; set; }
     public RelayCommand AddImageCommand { get; set; }
-
-
 
     public BitmapImage CurrentPicture { get; set; }
 
@@ -90,19 +87,13 @@ Edit -> Add Image", "Information", MessageBoxButton.OK, MessageBoxImage.Informat
         {
             var uniformGrid = o as UniformGrid;
 
-
             var viewModelForAdd = new Add_Image_WindowViewModel();
 
             Add_Image_Window addWindowPage = new();
             addWindowPage.DataContext = viewModelForAdd;
             addWindowPage.ShowDialog();
 
-
-
             BitmapImage picture = new BitmapImage(new Uri(viewModelForAdd.filePath!, UriKind.Relative));
-
-
-
 
             var uCViewModel = new UCViewModel();
             uCViewModel.CurrentImageSource = picture;
@@ -112,11 +103,10 @@ Edit -> Add Image", "Information", MessageBoxButton.OK, MessageBoxImage.Informat
             uc.DataContext = uCViewModel;
 
 
-            uniformGrid.Children.Add(uc);
+            uniformGrid!.Children.Add(uc);
             GalaryImages.Add(viewModelForAdd.Image);
         });
     }
-
 
 
     private void Photo_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -126,7 +116,6 @@ Edit -> Add Image", "Information", MessageBoxButton.OK, MessageBoxImage.Informat
         userControlViewModel.CurrentImageSource = uc!.Picture.ImageSource;
         int count = 0;
 
-        //foreach (var item in GalaryImages)
         for (int i = 0; i < GalaryImages.Count; i++)
         {
             var picture = new BitmapImage(new Uri(GalaryImages[i].ImageUrl!, UriKind.Relative));
@@ -159,14 +148,11 @@ Edit -> Add Image", "Information", MessageBoxButton.OK, MessageBoxImage.Informat
 
         viewModel.MyGrid.Children.Add(userControl);
 
-        //viewModel.user = uc!;
         viewModel.Galaries = GalaryImages;
         viewModel.Galary = userControlViewModel.Photo;
         viewModel.Count = count;
         window.DataContext = viewModel;
 
-
         window.ShowDialog();
     }
-
 }

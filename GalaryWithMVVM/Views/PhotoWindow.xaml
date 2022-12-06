@@ -102,7 +102,6 @@
         <Grid Grid.Row="2"
               Name="mygrid"/>
 
-
         <!-- Prev Next Pause Button -->
         <StackPanel Grid.Row="3" 
                     Orientation="Horizontal"
@@ -127,7 +126,7 @@
             <ToggleButton BorderThickness="0"
                           Width="50"
                           Command="{Binding PauseCommand}"
-                          CommandParameter="{Binding ElementName=mainGrid}"
+                          CommandParameter="{Binding ElementName=Pause}"
                           ToolTip="Pause image"
                           Background="Transparent"
                           Name="Pause"
@@ -161,7 +160,6 @@
                 </Ellipse>
             </Button>
         </StackPanel>
-
 
     </Grid>
 </Window>

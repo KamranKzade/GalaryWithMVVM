@@ -5,6 +5,6 @@ namespace GalaryWithMVVM.ViewModels;
 
 public class Model
 {
-    public ImageSource CurrentImageSource { get; internal set; }
-    public GalaryImage Photo { get; internal set; }
+    public ImageSource? CurrentImageSource { get; internal set; }
+    public GalaryImage? Photo { get; internal set; }
 }
