@@ -32,10 +32,10 @@
 
         <!-- Image -->
         <StackPanel>
-
             <Ellipse Margin="2"
                      Height="200"
                      AllowDrop="True"
+                     Name="Ellipse"
                      Width="350">
                 <Ellipse.Fill>
                     <ImageBrush x:Name="Picture"
@@ -44,9 +44,9 @@
                 </Ellipse.Fill>
                 <Ellipse.InputBindings>
                     <MouseBinding 
-                           Command="{Binding DataContext.CLoadModelFromDisk, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                        CommandParameter="{Binding ElementName=Picture}"
-                        Gesture="LeftClick"  
+                           Command="{Binding CLoadModelFromDisk}"
+                           CommandParameter="{Binding ElementName=Ellipse}"
+                           Gesture="LeftClick"  
                     />
                 </Ellipse.InputBindings>
             </Ellipse>

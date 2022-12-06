@@ -90,6 +90,8 @@ Edit -> Add Image", "Information", MessageBoxButton.OK, MessageBoxImage.Informat
             var viewModelForAdd = new Add_Image_WindowViewModel();
 
             Add_Image_Window addWindowPage = new();
+
+
             addWindowPage.DataContext = viewModelForAdd;
             addWindowPage.ShowDialog();
 

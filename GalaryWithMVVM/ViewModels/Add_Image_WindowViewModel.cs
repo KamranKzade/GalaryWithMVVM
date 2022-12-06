@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace GalaryWithMVVM.ViewModels;
 
@@ -15,14 +16,13 @@ public class Add_Image_WindowViewModel : BaseViewModel
 {
     public GalaryImage Image { get; set; }
     public string filePath { get; set; }
-
+    public ImageBrush Picture { get; set; }
 
 
 
     public RelayCommand AddImageCommand { get; set; }
     public RelayCommand AddImageButtonWithCommand { get; set; }
     public RelayCommand CLoadModelFromDisk { get; set; }
-
 
 
 
@@ -54,7 +54,7 @@ public class Add_Image_WindowViewModel : BaseViewModel
             var window = o as Window;
 
 
-            foreach (StackPanel tb in FindVisualChilds<StackPanel>(window))
+            foreach (StackPanel tb in FindVisualChilds<StackPanel>(window!))
             {
                 var imageName_name = (tb!.Children[0] as Grid)!.Children[1] as TextBox;
                 var author_name = (tb.Children[2] as Grid)!.Children[1] as TextBox;
@@ -82,20 +82,29 @@ public class Add_Image_WindowViewModel : BaseViewModel
 
         CLoadModelFromDisk = new RelayCommand((o) =>
         {
-            var Picture = o as ImageBrush;
+            var ellipse = o as Ellipse;
+            var picture = ellipse.Fill as ImageBrush;
+            Picture = picture;
+            ellipse.DragEnter += Ellipse_DragEnter;
 
-           //if (e.Data.GetDataPresent(DataFormats.FileDrop))
-           //{
-           //    string[] filenames = e.Data.GetData(DataFormats.FileDrop, true) as string[];
-           //
-           //    foreach (string fileName in filenames!)
-           //    {
-           //        Picture.ImageSource = new BitmapImage(new Uri(fileName));
-           //
-           //        filePath = fileName;
-           //    }
-           //}
+
+
         });
+    }
+
+    private void Ellipse_DragEnter(object sender, DragEventArgs e)
+    {
+        if (e.Data.GetDataPresent(DataFormats.FileDrop))
+        {
+            string[]? filenames = e.Data.GetData(DataFormats.FileDrop, true) as string[];
+
+            foreach (string fileName in filenames!)
+            {
+                Picture.ImageSource = new BitmapImage(new Uri(fileName));
+
+                filePath = fileName;
+            }
+        }
     }
 
     public static IEnumerable<T> FindVisualChilds<T>(DependencyObject depObj) where T : DependencyObject
@@ -109,24 +118,4 @@ public class Add_Image_WindowViewModel : BaseViewModel
             foreach (T childOfChild in FindVisualChilds<T>(ithChild)) yield return childOfChild;
         }
     }
-
-
-
-
-
-    //private void Profile_Photo_DragEnter(object sender, DragEventArgs e)
-    //{
-    //    if (e.Data.GetDataPresent(DataFormats.FileDrop))
-    //    {
-    //        string[] filenames = e.Data.GetData(DataFormats.FileDrop, true) as string[];
-
-    //        foreach (string fileName in filenames!)
-    //        {
-    //            Picture.ImageSource = new BitmapImage(new Uri(fileName));
-
-    //            filePath = fileName;
-    //        }
-    //    }
-    //}
-
 }
