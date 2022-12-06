@@ -21,7 +21,7 @@ public class PhotoWindowViewModel : BaseViewModel
 
     public UserControl_Photos user { get; set; }
 
-
+    public Grid MyGrid { get; set; }
     private ObservableCollection<GalaryImage> galaries;
 
     public ObservableCollection<GalaryImage> Galaries
@@ -68,7 +68,7 @@ public class PhotoWindowViewModel : BaseViewModel
             {
                 UserControl_Photos photo = new();
                 var vm = new UCViewModel();
-                
+
                 vm.CurrentImageSource = new BitmapImage(new Uri(Galaries![Count]!.ImageUrl!, UriKind.Relative));
                 vm.Photo = Galaries[Count];
                 photo.DataContext = vm;
@@ -79,7 +79,7 @@ public class PhotoWindowViewModel : BaseViewModel
                 }
 
                 user = photo;
-                
+
 
                 mygrid!.Children.Add(photo);
                 Count--;
@@ -97,13 +97,13 @@ public class PhotoWindowViewModel : BaseViewModel
 
             try
             {
-                UserControl_Photos photo =new();
+                UserControl_Photos photo = new();
                 var vm = new UCViewModel();
-                vm.CurrentImageSource = new BitmapImage(new Uri(Galaries![Count ]!.ImageUrl!, UriKind.Relative));
-                vm.Photo = Galaries[Count ];
+                vm.CurrentImageSource = new BitmapImage(new Uri(Galaries![Count]!.ImageUrl!, UriKind.Relative));
+                vm.Photo = Galaries[Count];
                 photo.DataContext = vm;
 
-                if (Count >Galaries.Count)
+                if (Count > Galaries.Count)
                 {
                     Count = Galaries.Count;
                 }

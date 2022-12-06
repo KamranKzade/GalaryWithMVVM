@@ -137,17 +137,32 @@ Edit -> Add Image", "Information", MessageBoxButton.OK, MessageBoxImage.Informat
                 break;
             }
         }
-        
+
+        var obj = new Model
+        {
+            CurrentImageSource = uc.Picture.ImageSource,
+            Photo = userControlViewModel.Photo
+        };
 
         uc.DataContext = userControlViewModel;
 
 
         PhotoWindow window = new();
         var viewModel = new PhotoWindowViewModel();
-        viewModel.user = uc!;
+        viewModel.MyGrid = window.mygrid;
+
+        var uVM = new UCViewModel();
+        uVM.CurrentImageSource = obj.CurrentImageSource;
+        uVM.Photo = obj.Photo;
+        var userControl = new UserControl_Photos();
+        userControl.DataContext = uVM;
+
+        viewModel.MyGrid.Children.Add(userControl);
+
+        //viewModel.user = uc!;
         viewModel.Galaries = GalaryImages;
         viewModel.Galary = userControlViewModel.Photo;
-        viewModel.Count=count;
+        viewModel.Count = count;
         window.DataContext = viewModel;
 
 
