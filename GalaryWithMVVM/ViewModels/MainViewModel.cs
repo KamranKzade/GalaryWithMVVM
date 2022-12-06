@@ -95,7 +95,7 @@ Edit -> Add Image", "Information", MessageBoxButton.OK, MessageBoxImage.Informat
             addWindowPage.DataContext = viewModelForAdd;
             addWindowPage.ShowDialog();
 
-            BitmapImage picture = new BitmapImage(new Uri(viewModelForAdd.filePath!, UriKind.Relative));
+            BitmapImage picture = new BitmapImage(new Uri(viewModelForAdd.FilePath!, UriKind.Relative));
 
             var uCViewModel = new UCViewModel();
             uCViewModel.CurrentImageSource = picture;
@@ -151,7 +151,7 @@ Edit -> Add Image", "Information", MessageBoxButton.OK, MessageBoxImage.Informat
         viewModel.MyGrid.Children.Add(userControl);
 
         viewModel.Galaries = GalaryImages;
-        viewModel.Galary = userControlViewModel.Photo;
+        viewModel.Galary = userControlViewModel.Photo!;
         viewModel.Count = count;
         window.DataContext = viewModel;
 

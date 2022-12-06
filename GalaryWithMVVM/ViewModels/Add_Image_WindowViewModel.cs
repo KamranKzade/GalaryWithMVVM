@@ -15,7 +15,7 @@ namespace GalaryWithMVVM.ViewModels;
 public class Add_Image_WindowViewModel : BaseViewModel
 {
     public GalaryImage Image { get; set; }
-    public string filePath { get; set; }
+    public string FilePath { get; set; }
     public ImageBrush Picture { get; set; }
 
 
@@ -35,16 +35,16 @@ public class Add_Image_WindowViewModel : BaseViewModel
         {
             var Picture = o as ImageBrush;
 
-            OpenFileDialog op = new OpenFileDialog();
+            OpenFileDialog Op = new ();
 
-            op.Title = "Select a picture";
-            op.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
+            Op.Title = "Select a picture";
+            Op.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
 
-            if (op.ShowDialog() == true)
+            if (Op.ShowDialog() == true)
             {
-                filePath = op.FileName;
+                FilePath = Op.FileName;
 
-                Picture!.ImageSource = new BitmapImage(new Uri(op.FileName));
+                Picture!.ImageSource = new BitmapImage(new Uri(Op.FileName));
                 Picture.Stretch = Stretch.Uniform;
             }
         });
@@ -62,7 +62,7 @@ public class Add_Image_WindowViewModel : BaseViewModel
 
                 Image.Name = imageName_name!.Text;
                 Image.Author = author_name!.Text;
-                Image.ImageUrl = filePath;
+                Image.ImageUrl = FilePath;
 
 
                 try
@@ -73,7 +73,7 @@ public class Add_Image_WindowViewModel : BaseViewModel
                 {
                     MessageBox.Show(ex.Message, "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
-                window.Close();
+                window!.Close();
                 break;
             }
 
@@ -83,8 +83,8 @@ public class Add_Image_WindowViewModel : BaseViewModel
         CLoadModelFromDisk = new RelayCommand((o) =>
         {
             var ellipse = o as Ellipse;
-            var picture = ellipse.Fill as ImageBrush;
-            Picture = picture;
+            var picture = ellipse!.Fill as ImageBrush;
+            Picture = picture!;
             ellipse.DragEnter += Ellipse_DragEnter;
 
 
@@ -102,7 +102,7 @@ public class Add_Image_WindowViewModel : BaseViewModel
             {
                 Picture.ImageSource = new BitmapImage(new Uri(fileName));
 
-                filePath = fileName;
+                FilePath = fileName;
             }
         }
     }
